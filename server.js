@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-const routesEndPoint = {};
+const appData = {};
 // Express to run server and routes
 const express = require("express");
 
@@ -8,6 +8,7 @@ const app = express();
 
 /* Dependencies */
 const bodyParser = require("body-parser");
+
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +18,7 @@ const cors = require("cors");
 app.use(cors());
 
 // Initialize the main project folder
-app.use(express.static("Project_3_Weather_App"));
+app.use(express.static("website"));
 
 const port = 8000;
 // Spin up the server
@@ -30,7 +31,14 @@ function listening() {
 }
 
 // Initialize all route with a callback function
+app.get("/", function(req, res) {
+  res.send("hello world");
+});
 
 // Callback function to complete GET '/all'
 
 // Post Route
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
