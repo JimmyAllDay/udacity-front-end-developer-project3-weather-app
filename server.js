@@ -1,5 +1,8 @@
-// Setup empty JS object to act as endpoint for all routes
-const appData = {};
+// Setup empty JS array to act as endpoint for all routes
+const data = [];
+
+// testing with array
+
 // Express to run server and routes
 const express = require("express");
 
@@ -18,7 +21,7 @@ const cors = require("cors");
 app.use(cors());
 
 // Initialize the main project folder
-app.use(express.static("website"));
+// app.use(express.static("website"));
 
 const port = 8000;
 // Spin up the server
@@ -32,13 +35,21 @@ function listening() {
 
 // Initialize all route with a callback function
 app.get("/", function(req, res) {
-  res.send("hello world");
+  res.send(data);
 });
 
 // Callback function to complete GET '/all'
 
 // Post Route
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.post("/", function(req, res) {
+  res.send("POST received");
 });
+
+// movie example
+
+app.post("/addMovie", addMovie);
+
+function addMovie(req, res) {
+  console.log(req.body);
+  data.push(req.body);
+}
