@@ -60,8 +60,8 @@ const newZip = zipValue;
 console.log(baseURL + apiKey);
 
 // Write an async function in app.js that uses fetch() to make a GET request to the OpenWeatherMap API.
-const getWeather = async (baseURL, newZip, apiKey) => {
-  const res = await fetch(baseURL, newZip, apiKey);
+const getWeather = async (baseURL, apiKey) => {
+  const res = await fetch(baseURL + apiKey);
   try {
     const data = await res.json();
     console.log(data);
