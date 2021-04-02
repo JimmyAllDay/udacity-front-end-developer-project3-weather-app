@@ -68,7 +68,7 @@ const getWeather = async (baseURL, newZip, apiKey) => {
     return data;
   } catch (error) {
     console.log("error", error);
-    // appropriately handle the error
+    // TODO: update error handling to appropriately handle the error
   }
 };
 
