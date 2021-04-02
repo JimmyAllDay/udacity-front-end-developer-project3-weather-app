@@ -45,11 +45,10 @@ app.post("/", function(req, res) {
   res.send("POST received");
 });
 
-// movie example
+// Add data (based on movie example)
+app.post("/addData", addData);
 
-app.post("/addMovie", addMovie);
-
-function addMovie(req, res) {
+function addData(req, res) {
   console.log(req.body);
   projectData.push(req.body);
 }
