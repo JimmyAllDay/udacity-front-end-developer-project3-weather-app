@@ -1,8 +1,6 @@
 // Setup empty JS array to act as endpoint for all routes
 const projectData = [];
 
-// testing with array
-
 // Express to run server and routes
 const express = require("express");
 
@@ -34,21 +32,29 @@ function listening() {
 }
 
 // Initialize all route with a callback function
-app.get("/", function(req, res) {
-  res.send(projectData);
+app.get("/all", function(req, res) {
+  res.send("Hello World!");
 });
 
 // Callback function to complete GET '/all'
+app.get("/all", function(req, res) {
+  res.send(projectData);
+});
 
 // Post Route
 app.post("/", function(req, res) {
   res.send("POST received");
 });
 
-// Add data (based on movie example)
+// Add data to project end-point
 app.post("/addData", addData);
 
 function addData(req, res) {
+  newEntry = {
+    feelings: req.body.feelings,
+    temp: req.body.temp,
+    date: req.body.date
+  };
   console.log(req.body);
   projectData.push(req.body);
 }
