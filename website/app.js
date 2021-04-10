@@ -38,54 +38,6 @@ const postData = async (url = "", data = {}) => {
   }
 };
 
-// Clickhandler for generate button
-// generateButton.addEventListener("click", async () => {
-//   const getTemp = async () => {
-//     const res = await fetch(
-//       "https://api.openweathermap.org/data/2.5/weather?zip=" +
-//         zip.value +
-//         ",us&appid=" +
-//         apiKey
-//     )
-//       .then(res => res.json())
-//       .then(data => {
-//         tempValue = data["main"]["temp"];
-//       })
-//       .catch(err =>
-//         alert("incorrect zip code. Please enter a zip code from within the USA")
-//       );
-//     try {
-//       getFeelings().then(
-//         postData("/addData", {
-//           feelings: feelingsValue,
-//           temp: tempValue,
-//           date: newDate
-//         })
-//       );
-//     } catch (error) {
-//       // appropriately handle the error
-//       console.log("error", error);
-//     }
-//   };
-//   getTemp();
-
-//   const updateUI = async () => {
-//     const request = await fetch("/fetchData");
-//     try {
-//       const allData = await request.json();
-//       console.log(allData);
-//       document.getElementById("date").innerText = allData[0].date;
-//       document.getElementById("temp").innerHTML = allData[0].temp;
-//       document.getElementById("content").innerHTML = allData[0].feelings;
-//     } catch (error) {
-//       console.log("error", error);
-//     }
-//   };
-//   setTimeout(function() {
-//     updateUI();
-//   }, 2000);
-// });
-
 generateButton.addEventListener("click", async () => {
   const getTemp = async () => {
     const res = await fetch(
