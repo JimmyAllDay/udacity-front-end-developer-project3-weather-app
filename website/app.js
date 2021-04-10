@@ -69,9 +69,9 @@ const getTemp = async () => {
 // ---------------------------THIS FUNCTION IS NOT RETURNING MY DATA -------------------
 
 const updateUI = async () => {
-  const request = await fetch("/");
+  const request = await fetch("/fetchData");
   try {
-    const allData = await request;
+    const allData = await request.json;
     console.log(allData);
     document.getElementById("date").innerText = allData[0];
     // document.getElementById('temp').innerHTML = allData[0].temp;

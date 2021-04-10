@@ -31,18 +31,8 @@ function listening() {
   console.log(`running on local host: ${port}`);
 }
 
-// Initialize all route with a callback function
-// app.get("/", function(req, res) {
-//   res.send(projectData);
-// });
-
-// Callback function to complete GET '/all'
-// app.get("/all", function(req, res) {
-//   res.send(projectData);
-// });
-
-// Post Route
-app.post("/", function(req, res) {
+// Callback function to complete GET '/fetchData'
+app.get("/fetchData", function(req, res) {
   res.send(projectData);
 });
 
