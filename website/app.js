@@ -15,9 +15,28 @@ async function getFeelings() {
   feelingsValue = feelings.value;
 }
 
-function sendData(e) {
-  getTemp();
-}
+// POST Route
+const postData = async (url = "", data = {}) => {
+  console.log(data);
+
+  const response = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    // Body data type must match "Content-Type" header
+    body: JSON.stringify(data)
+  });
+
+  try {
+    const newData = await response.json();
+    console.log(newData);
+    return newData;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
 const getTemp = async () => {
   const res = await fetch(
@@ -47,25 +66,16 @@ const getTemp = async () => {
   }
 };
 
-// POST Route
-const postData = async (url = "", data = {}) => {
-  console.log(data);
+// ---------------------------THIS FUNCTION IS NOT RETURNING MY DATA -------------------
 
-  //   Not sure what this is yet
-  const response = await fetch(url, {
-    method: "POST",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    // Body data type must match "Content-Type" header
-    body: JSON.stringify(data)
-  });
-
+const updateUI = async () => {
+  const request = await fetch("/");
   try {
-    const newData = await response.json();
-    console.log(newData);
-    return newData;
+    const allData = await request;
+    console.log(allData);
+    document.getElementById("date").innerText = allData[0];
+    // document.getElementById('temp').innerHTML = allData[0].temp;
+    // document.getElementById('content').innerHTML = allData[0].feelings;
   } catch (error) {
     console.log("error", error);
   }
@@ -73,39 +83,9 @@ const postData = async (url = "", data = {}) => {
 
 // Clickhandler for generate button
 generateButton.addEventListener("click", async () => {
-  sendData();
+  getTemp();
+
+  setTimeout(function() {
+    updateUI();
+  }, 2000);
 });
-
-// Clickhandler for updating UI
-generateButton.addEventListener("click", retrieveData);
-
-function retrieveData(e) {
-  // const newDate = document.getElementById("date").value;
-  // const newTemp = document.getElementById("temp").value;
-  // const content = document.getElementById("content").value;
-
-  updateUI("/")
-    // New Syntax!
-    .then(function(data) {
-      // Add data
-      console.log(data);
-      postData("/", {
-        // feelings: data.feelings,
-        // temp: data.temp,
-        // date: data.date
-      });
-    });
-}
-
-const updateUI = async () => {
-  const request = await fetch("/");
-  try {
-    const allData = await request.json();
-    console.log(allData);
-    // document.getElementById("date").innerHTML = allData[0].date;
-    // document.getElementById("temp").innerHTML = allData[0].temp;
-    // document.getElementById("content").innerHTML = allData[0].feelings;
-  } catch (error) {
-    console.log("error", error);
-  }
-};

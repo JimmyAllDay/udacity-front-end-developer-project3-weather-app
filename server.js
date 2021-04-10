@@ -37,9 +37,9 @@ function listening() {
 // });
 
 // Callback function to complete GET '/all'
-app.get("/", function(req, res) {
-  res.send(projectData);
-});
+// app.get("/all", function(req, res) {
+//   res.send(projectData);
+// });
 
 // Post Route
 app.post("/", function(req, res) {
@@ -55,6 +55,6 @@ function addData(req, res) {
     temp: req.body.temp,
     date: req.body.date
   };
-  console.log(req.body);
+
   projectData.push(req.body);
 }
