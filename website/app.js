@@ -38,54 +38,95 @@ const postData = async (url = "", data = {}) => {
   }
 };
 
-const getTemp = async () => {
-  const res = await fetch(
-    "https://api.openweathermap.org/data/2.5/weather?zip=" +
-      zip.value +
-      ",us&appid=" +
-      apiKey
-  )
-    .then(res => res.json())
-    .then(data => {
-      tempValue = data["main"]["temp"];
-    })
-    .catch(err =>
-      alert("incorrect zip code. Please enter a zip code from within the USA")
-    );
-  try {
-    getFeelings().then(
-      postData("/addData", {
-        feelings: feelingsValue,
-        temp: tempValue,
-        date: newDate
-      })
-    );
-  } catch (error) {
-    // appropriately handle the error
-    console.log("error", error);
-  }
-};
-
-// ---------------------------THIS FUNCTION IS NOT RETURNING MY DATA -------------------
-
-const updateUI = async () => {
-  const request = await fetch("/fetchData");
-  try {
-    const allData = await request.json;
-    console.log(allData);
-    document.getElementById("date").innerText = allData[0];
-    // document.getElementById('temp').innerHTML = allData[0].temp;
-    // document.getElementById('content').innerHTML = allData[0].feelings;
-  } catch (error) {
-    console.log("error", error);
-  }
-};
-
 // Clickhandler for generate button
-generateButton.addEventListener("click", async () => {
-  getTemp();
+// generateButton.addEventListener("click", async () => {
+//   const getTemp = async () => {
+//     const res = await fetch(
+//       "https://api.openweathermap.org/data/2.5/weather?zip=" +
+//         zip.value +
+//         ",us&appid=" +
+//         apiKey
+//     )
+//       .then(res => res.json())
+//       .then(data => {
+//         tempValue = data["main"]["temp"];
+//       })
+//       .catch(err =>
+//         alert("incorrect zip code. Please enter a zip code from within the USA")
+//       );
+//     try {
+//       getFeelings().then(
+//         postData("/addData", {
+//           feelings: feelingsValue,
+//           temp: tempValue,
+//           date: newDate
+//         })
+//       );
+//     } catch (error) {
+//       // appropriately handle the error
+//       console.log("error", error);
+//     }
+//   };
+//   getTemp();
 
-  setTimeout(function() {
-    updateUI();
-  }, 2000);
+//   const updateUI = async () => {
+//     const request = await fetch("/fetchData");
+//     try {
+//       const allData = await request.json();
+//       console.log(allData);
+//       document.getElementById("date").innerText = allData[0].date;
+//       document.getElementById("temp").innerHTML = allData[0].temp;
+//       document.getElementById("content").innerHTML = allData[0].feelings;
+//     } catch (error) {
+//       console.log("error", error);
+//     }
+//   };
+//   setTimeout(function() {
+//     updateUI();
+//   }, 2000);
+// });
+
+generateButton.addEventListener("click", async () => {
+  const getTemp = async () => {
+    const res = await fetch(
+      "https://api.openweathermap.org/data/2.5/weather?zip=" +
+        zip.value +
+        ",us&appid=" +
+        apiKey
+    )
+      .then(res => res.json())
+      .then(data => {
+        tempValue = data["main"]["temp"];
+      })
+      .catch(err =>
+        alert("incorrect zip code. Please enter a zip code from within the USA")
+      );
+    try {
+      getFeelings().then(
+        postData("/addData", {
+          feelings: feelingsValue,
+          temp: tempValue,
+          date: newDate
+        })
+      );
+    } catch (error) {
+      // appropriately handle the error
+      console.log("error", error);
+    }
+  };
+  await getTemp();
+
+  const updateUI = async () => {
+    const request = await fetch("/fetchData");
+    try {
+      const allData = await request.json();
+      console.log(allData);
+      document.getElementById("date").innerText = allData[0].date;
+      document.getElementById("temp").innerHTML = allData[0].temp;
+      document.getElementById("content").innerHTML = allData[0].feelings;
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  updateUI();
 });

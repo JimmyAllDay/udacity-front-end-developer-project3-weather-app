@@ -31,11 +31,6 @@ function listening() {
   console.log(`running on local host: ${port}`);
 }
 
-// Callback function to complete GET '/fetchData'
-app.get("/fetchData", function(req, res) {
-  res.send(projectData);
-});
-
 // Add data to project end-point
 app.post("/addData", addData);
 
@@ -48,3 +43,8 @@ function addData(req, res) {
 
   projectData.push(req.body);
 }
+
+// Callback function to complete GET '/fetchData'
+app.get("/fetchData", function(req, res) {
+  res.send(projectData);
+});
