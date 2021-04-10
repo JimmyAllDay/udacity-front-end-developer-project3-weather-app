@@ -32,18 +32,18 @@ function listening() {
 }
 
 // Initialize all route with a callback function
-app.get("/all", function(req, res) {
-  res.send("Hello World!");
-});
+// app.get("/", function(req, res) {
+//   res.send(projectData);
+// });
 
 // Callback function to complete GET '/all'
-app.get("/all", function(req, res) {
+app.get("/", function(req, res) {
   res.send(projectData);
 });
 
 // Post Route
 app.post("/", function(req, res) {
-  res.send("POST received");
+  res.send(projectData);
 });
 
 // Add data to project end-point

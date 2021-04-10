@@ -80,27 +80,31 @@ generateButton.addEventListener("click", async () => {
 generateButton.addEventListener("click", retrieveData);
 
 function retrieveData(e) {
-  getData("/all")
+  // const newDate = document.getElementById("date").value;
+  // const newTemp = document.getElementById("temp").value;
+  // const content = document.getElementById("content").value;
+
+  updateUI("/")
     // New Syntax!
     .then(function(data) {
       // Add data
       console.log(data);
       postData("/", {
-        feelings: data.feelings,
-        temp: data.temp,
-        date: date.data
+        // feelings: data.feelings,
+        // temp: data.temp,
+        // date: data.date
       });
-    })
-    .then(updateUI());
+    });
 }
 
 const updateUI = async () => {
-  const request = await fetch("/all");
+  const request = await fetch("/");
   try {
     const allData = await request.json();
-    document.getElementById("date").innerHTML = allData[0].date;
-    document.getElementById("temp").innerHTML = allData[0].temp;
-    document.getElementById("content").innerHTML = allData[0].feelings;
+    console.log(allData);
+    // document.getElementById("date").innerHTML = allData[0].date;
+    // document.getElementById("temp").innerHTML = allData[0].temp;
+    // document.getElementById("content").innerHTML = allData[0].feelings;
   } catch (error) {
     console.log("error", error);
   }
