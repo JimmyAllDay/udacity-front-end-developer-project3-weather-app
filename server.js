@@ -1,5 +1,5 @@
 // Setup empty JS array to act as endpoint for all routes
-const projectData = [];
+let projectData = {};
 
 // Express to run server and routes
 const express = require("express");
@@ -41,7 +41,7 @@ function addData(req, res) {
     date: req.body.date
   };
 
-  projectData.push(req.body);
+  projectData = req.body;
 }
 
 // Callback function to complete GET '/fetchData'

@@ -3,12 +3,12 @@ let zip = document.getElementById("zip");
 let feelings = document.getElementById("feelings");
 let feelingsValue = "";
 const generateButton = document.getElementById("generate");
-const apiKey = "4c2fca6a71d87924df1ea43ade5f444d";
+const apiKey = "4c2fca6a71d87924df1ea43ade5f444d&";
 let tempValue = "";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = d.getMonth() + 1 + "." + d.getDate() + "." + d.getFullYear();
 
 // Get user feelings input
 async function getFeelings() {
@@ -19,7 +19,7 @@ async function getFeelings() {
 const postData = async (url = "", data = {}) => {
   console.log(data);
 
-  const response = await fetch(url, {
+  let response = await fetch(url, {
     method: "POST",
     credentials: "same-origin",
     headers: {
@@ -73,9 +73,9 @@ generateButton.addEventListener("click", async () => {
     try {
       const allData = await request.json();
       console.log(allData);
-      document.getElementById("date").innerText = allData[0].date;
-      document.getElementById("temp").innerHTML = allData[0].temp;
-      document.getElementById("content").innerHTML = allData[0].feelings;
+      document.getElementById("date").innerHTML = allData.date;
+      document.getElementById("temp").innerHTML = allData.temp;
+      document.getElementById("content").innerHTML = allData.feelings;
     } catch (error) {
       console.log("error", error);
     }
