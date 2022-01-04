@@ -23,10 +23,10 @@ const postData = async (url = "", data = {}) => {
     method: "POST",
     credentials: "same-origin",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     // Body data type must match "Content-Type" header
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   try {
@@ -46,11 +46,11 @@ generateButton.addEventListener("click", async () => {
         ",us&appid=" +
         apiKey
     )
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         tempValue = data["main"]["temp"];
       })
-      .catch(err =>
+      .catch((err) =>
         alert("incorrect zip code. Please enter a zip code from within the USA")
       );
     try {
@@ -58,7 +58,7 @@ generateButton.addEventListener("click", async () => {
         postData("/addData", {
           feelings: feelingsValue,
           temp: tempValue,
-          date: newDate
+          date: newDate,
         })
       );
     } catch (error) {
